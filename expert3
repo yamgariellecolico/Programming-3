@@ -1,0 +1,92 @@
+public class Main {
+    public static void main(String[] args) {
+
+        String username = "student";
+        int pin = 1234;
+
+        double balance = 10000;
+        double withdrawal = 2000;
+
+        String tier = "";
+        double feeRate = 0;
+        double fee = 0;
+        double total = 0;
+
+        boolean approved = false;
+        String reason = "";
+
+        if (username.equals("student")) {
+
+            if (pin == 1234) {
+
+                if (balance >= 15000) {
+                    tier = "Platinum";
+                } else if (balance >= 10000) {
+                    tier = "Gold";
+                } else if (balance >= 5000) {
+                    tier = "Silver";
+                } else {
+                    tier = "Bronze";
+                }
+
+                if (withdrawal <= balance) {
+
+                    if (tier.equals("Bronze") && withdrawal <= 1000) {
+                        approved = true;
+                    } else if (tier.equals("Silver") && withdrawal <= 3000) {
+                        approved = true;
+                    } else if (tier.equals("Gold") && withdrawal <= 5000) {
+                        approved = true;
+                    } else if (tier.equals("Platinum") && withdrawal <= 10000) {
+                        approved = true;
+                    } else {
+                        reason = "Withdrawal is over the daily limit.";
+                    }
+
+                } else {
+                    reason = "Insufficient balance.";
+                }
+
+                switch (tier) {
+                    case "Bronze":
+                        feeRate = 0.03;
+                        break;
+                    case "Silver":
+                        feeRate = 0.02;
+                        break;
+                    case "Gold":
+                        feeRate = 0.01;
+                        break;
+                    case "Platinum":
+                        feeRate = 0.005;
+                        break;
+                }
+
+                fee = withdrawal * feeRate;
+                total = withdrawal + fee;
+
+                if (approved) {
+
+                    if (total <= balance) {
+                        System.out.println("APPROVED");
+                        System.out.println("Account Tier: " + tier);
+                        System.out.println("Withdrawal: " + withdrawal);
+                        System.out.println("Fee: " + fee);
+                        System.out.println("Total: " + total);
+                    } else {
+                        System.out.println("DENIED: Insufficient balance for withdrawal and fee.");
+                    }
+
+                } else {
+                    System.out.println("DENIED: " + reason);
+                }
+
+            } else {
+                System.out.println("DENIED: Wrong PIN.");
+            }
+
+        } else {
+            System.out.println("DENIED: Wrong username.");
+        }
+    }
+}
