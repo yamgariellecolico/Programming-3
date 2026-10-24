@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class UnitCastingConverter {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter centimeters: ");
+        double centimeters = sc.nextDouble();
+
+        int meters = (int) (centimeters / 100);
+
+        double remainingCm = centimeters - (meters * 100);
+
+        System.out.println("Whole meters: " + meters);
+        System.out.println("Remaining centimeters: " + remainingCm);
+
+        int number = 25;
+        double widenedNumber = number;
+        System.out.println("Implicit widening: " + widenedNumber);
+
+        double decimalNumber = 15.75;
+        int narrowedNumber = (int) decimalNumber;
+        System.out.println("Explicit narrowing: " + narrowedNumber);
+
+        sc.close();
+    }
+}
