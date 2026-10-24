@@ -1,0 +1,23 @@
+public class Main {
+    public static void main(String[] args) {
+        double balance = 1000;
+
+        balance += 200;
+        System.out.println("After adding: " + balance);
+
+        balance *= 2;
+        System.out.println("After multiplying: " + balance);
+
+        balance += 500;
+        System.out.println("Final balance: " + balance);
+
+        int count = 5;
+
+        System.out.println("Postfix: " + count++);
+        System.out.println("After postfix: " + count);
+
+        System.out.println("Prefix: " + ++count);
+        System.out.println("After prefix: " + count);
+
+    }
+}
