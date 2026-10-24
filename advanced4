@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args) {
+
+        int size = 6;
+
+        for (int row = 1; row <= size; row++) {
+
+            if (row == 4) {
+                continue;
+            }
+
+            for (int col = 1; col <= row; col++) {
+
+                if (col == 4) {
+                    break;
+                }
+
+                System.out.print("* ");
+            }
+
+            System.out.println();
+        }
+    }
+}
