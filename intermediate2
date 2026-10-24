@@ -1,0 +1,15 @@
+public class Main {
+    public static void main(String[] args) {
+        double average = 85;
+        int absences = 2;
+
+        System.out.println("Average Grade: " + average);
+        System.out.println("Absences: " + absences);
+
+        if ((average >= 75 && absences <= 3) || average >= 90) {
+            System.out.println("Result: PASS");
+        } else {
+            System.out.println("Result: FAIL");
+        }
+    }
+}
