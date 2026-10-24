@@ -1,0 +1,148 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static Scanner input = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        int[][] inventory = {
+            {20, 15, 10},
+            {8, -1, 25},
+            {5, 30, 12}
+        };
+
+        int choice;
+
+        do {
+            System.out.println("\n--- WAREHOUSE INVENTORY ---");
+            System.out.println("1. Show Inventory");
+            System.out.println("2. Total Inventory");
+            System.out.println("3. Find Critical Shelf");
+            System.out.println("4. Restock");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+            choice = input.nextInt();
+
+            if (choice == 1) {
+                showInventory(inventory);
+
+            } else if (choice == 2) {
+                totalInventory(inventory);
+
+            } else if (choice == 3) {
+                findCriticalShelf(inventory);
+
+            } else if (choice == 4) {
+                restock(inventory);
+
+            } else if (choice == 5) {
+                System.out.println("Program ended.");
+
+            } else {
+                System.out.println("Invalid choice.");
+            }
+
+        } while (choice != 5);
+    }
+
+    public static void showInventory(int[][] inventory) {
+
+        for (int row = 0; row < inventory.length; row++) {
+
+            for (int col = 0; col < inventory[row].length; col++) {
+
+                System.out.print(inventory[row][col] + "\t");
+            }
+
+            System.out.println();
+        }
+    }
+
+    public static void totalInventory(int[][] inventory) {
+
+        int total = 0;
+
+        for (int row = 0; row < inventory.length; row++) {
+
+            for (int col = 0; col < inventory[row].length; col++) {
+
+                if (inventory[row][col] == -1) {
+                    continue;
+                }
+
+                total = total + inventory[row][col];
+            }
+        }
+
+        System.out.println("Total Inventory: " + total);
+    }
+
+    public static void findCriticalShelf(int[][] inventory) {
+
+        boolean found = false;
+
+        for (int row = 0; row < inventory.length; row++) {
+
+            for (int col = 0; col < inventory[row].length; col++) {
+
+                if (inventory[row][col] >= 0 &&
+                    inventory[row][col] <= 5) {
+
+                    System.out.println("Critical shelf found at row "
+                            + row + ", column " + col);
+
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No critical shelf found.");
+        }
+    }
+
+    public static void restock(int[][] inventory) {
+
+        System.out.print("Enter row: ");
+        int row = input.nextInt();
+
+        System.out.print("Enter column: ");
+        int col = input.nextInt();
+
+        while (row < 0 || row >= inventory.length ||
+               col < 0 || col >= inventory[row].length) {
+
+            System.out.println("Invalid shelf location.");
+            System.out.print("Enter row again: ");
+            row = input.nextInt();
+
+            System.out.print("Enter column again: ");
+            col = input.nextInt();
+        }
+
+        System.out.print("Enter quantity to add: ");
+        int amount = input.nextInt();
+
+        while (amount <= 0) {
+            System.out.println("Quantity must be greater than 0.");
+            System.out.print("Enter quantity again: ");
+            amount = input.nextInt();
+        }
+
+        if (inventory[row][col] == -1) {
+            System.out.println("Cannot restock a damaged shelf.");
+            return;
+        }
+
+        inventory[row][col] = inventory[row][col] + amount;
+
+        System.out.println("Restocking successful.");
+        System.out.println("New quantity: " + inventory[row][col]);
+    }
+}
